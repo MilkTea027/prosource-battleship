@@ -11,7 +11,10 @@ namespace ProSource.Robles.Battleship.EnemyShip.Steps
         public override void Process(EnemyShipContext context)
         {
             var instructionLabel = this.GetFormValue<Label>(context, FormControlName.LabelInstruction);
+            var enemyShipGroupBox = this.GetFormValue<GroupBox>(context, FormControlName.GroupBoxEnemyShips);
+
             instructionLabel.Text = $"Attack Enemy Until One Wins";
+            enemyShipGroupBox.Text = "Enemy Ships";
 
             this.Next(context);
         }

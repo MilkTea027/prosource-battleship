@@ -75,6 +75,11 @@ namespace ProSource.Robles.Battleship
             button.Text = isHit ? "O" : "X";
             button.ForeColor = isHit ? this.EnemyContext.HitColor : this.EnemyContext.MissColor;
 
+            if (isHit)
+            {
+                this.EnemyContext.PlacedShipButtons.Remove(enemyButton);
+            }
+
             if (this.EnemyContext.PlacedShipButtons.Any())
             {
                 this.AttackPlayer();
@@ -97,7 +102,10 @@ namespace ProSource.Robles.Battleship
 
             this.EnemyContext.PlayerButtons.RemoveAt(randomIndex);
 
-            if (!this.EnemyContext.PlayerButtons.Any())
+            var PlayerShips = this.EnemyContext.PlayerButtons
+                .Where(pb => pb.BackColor != this.EnemyContext.NoShipColor).Any();
+
+            if (!PlayerShips)
             {
                 this.PlayerWins("Enemy");
             }
